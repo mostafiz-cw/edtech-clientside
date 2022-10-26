@@ -1,7 +1,46 @@
 import React from "react";
+import { useContext } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Contexts/UserContext";
 
 const Register = () => {
+
+    const [error, setError] = useState(null);
+    const {createUser} = useContext(AuthContext);
+
+    // register submit handler
+    const handleRegisterSubmit = (event) => {
+        setError('');
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const url = form.url.value;
+        const password = form.pwd.value;
+        console.log(name,email,url,password);
+
+        if(password.length < 6){
+            setError("Password must be 6 characters");
+            return;
+        };
+        form.reset();
+
+        createUser(email,password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error =>{
+            console.error(error);
+        })
+
+
+
+    };
+
+
+
   return (
     <div>
       <div className="relative py-16 before:absolute before:inset-0 before:h-[50%] before:w-full before:bg-gray-200">
@@ -18,14 +57,13 @@ const Register = () => {
                 <h2 className="mb-8 text-2xl font-bold text-cyan-900">
                 Create your Free Account
                 </h2>
-                <form action="" className="space-y-8">
+                <form onSubmit={handleRegisterSubmit} action="" className="space-y-8">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-gray-700">
                       Full Name
                     </label>
                     <input
                       type="text"
-                      required
                       name="name"
                       id="name"
                       className="focus:outline-none block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-sky-300"
@@ -37,7 +75,6 @@ const Register = () => {
                     </label>
                     <input
                       type="email"
-                      required
                       name="email"
                       id="email"
                       className="focus:outline-none block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-sky-300"
@@ -49,7 +86,6 @@ const Register = () => {
                     </label>
                     <input
                       type="text"
-                      required
                       name="url"
                       id="url"
                       className="focus:outline-none block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-sky-300"
@@ -68,11 +104,11 @@ const Register = () => {
                     </div>
                     <input
                       type="password"
-                      required
                       name="pwd"
                       id="pwd"
                       className="focus:outline-none block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-sky-300"
                     />
+                    <small className="text-red-600">{error}</small>
                   </div>
                   <button
                     type="submit"
