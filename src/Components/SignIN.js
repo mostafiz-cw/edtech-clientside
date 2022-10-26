@@ -1,11 +1,17 @@
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Contexts/UserContext";
 
 const SignIN = () => {
 
+  // firebase log in auth from user context
   const {logIn} = useContext(AuthContext);
+
+  // jump course page after log in using react router
+  const navigate = useNavigate();
+
+
 
 
   // sign in submit handeler
@@ -19,6 +25,8 @@ const SignIN = () => {
     .then(result => {
       const user = result.user;
       console.log(user);
+      form.reset();
+      navigate('/courses')
     })
     .catch(error => console.error(error))
 

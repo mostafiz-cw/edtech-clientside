@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../Contexts/UserContext';
 
 function BasicExample() {
-  const {user} = useContext(AuthContext);
-  // console.dir(user);
+  const {user, logOut} = useContext(AuthContext);
+  console.dir(user);
 
   return (
     <Navbar bg="primary" expand="lg" variant="dark">
@@ -21,10 +21,24 @@ function BasicExample() {
             <Link to='/courses' className="font-semibold no-underline"><Nav.Link className="text-white" href="#link">Courses</Nav.Link></Link>
             <Link to='/blog' className="font-semibold no-underline"><Nav.Link className="text-white" href="#link">Blog</Nav.Link></Link>
             <Link to='/faq' className="font-semibold no-underline"><Nav.Link className="text-white" href="#link">Faq</Nav.Link></Link>
-            <Link to='/signin' className="no-underline font-semibold"><Nav.Link href="#link" className="text-white">Sign In</Nav.Link>
-            </Link>
-            <Link to='/register' className="no-underline font-semibold"><Nav.Link href="#link" className="text-white">Register</Nav.Link>
-            </Link>
+            
+            {
+              user?.uid ?
+              <Link onClick={logOut} to='/' className="no-underline font-semibold"><Nav.Link href="#link" className="text-white">Log Out</Nav.Link>
+              </Link>  :
+
+              <>
+
+                <Link to='/signin' className="no-underline font-semibold"><Nav.Link href="#link" className="text-white">Sign In</Nav.Link>
+                </Link>
+                <Link to='/register' className="no-underline font-semibold"><Nav.Link href="#link" className="text-white">Register</Nav.Link>
+                </Link>
+                
+              </>
+
+            }
+            
+            <span>{user?.email}</span>
             {/* <NavDropdown title="Log In" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
