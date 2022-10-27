@@ -1,3 +1,53 @@
+### Website Name: Tutflix
+## Live Website Link: https://assignment-10-learing-webapp.web.app/
+
+## Following tecenology I used for this project
+
+
+* react router
+* css framework
+* Tailwind
+* Bootstrap
+* react bootstarap
+* firebase for auth
+* express js for backend
+* vercel deployment
+
+
+# Features and Functionality
+
+* 100% responsive
+* Sign in and register form
+* Log out nad nav bar 
+* Toggle Button
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -17,7 +17,7 @@ const Home = () => {
               </div>
               <div hidden="" className="lg:block lg:w-5/12">
                 <img
-                  src="images/watch.svg"
+                  src="https://i.postimg.cc/7Z80ST9K/5514.jpg"
                   className="w-full"
                   alt="wath illustration"
                   loading="lazy"
@@ -28,7 +28,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="pb-8">
+        {/* <div className="pb-8">
           <div className="container m-auto px-6 md:px-12 lg:px-6">
             <div className="py-8 px-12 bg-cyan-50 rounded-2xl">
               <span className="block text-center font-medium text-cyan-700">
@@ -108,7 +108,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </>
     </div>
   );
