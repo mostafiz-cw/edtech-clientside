@@ -1,5 +1,6 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Contexts/UserContext";
@@ -11,8 +12,8 @@ const SignIN = () => {
 
   // jump course page after log in using react router
   const navigate = useNavigate();
-
   
+  const [error, setError] = useState('');
 
 
 
@@ -20,6 +21,7 @@ const SignIN = () => {
   // sign in submit handeler
   const signINSubmitHanler = (event)=>{
     event.preventDefault();
+    setError('');
     const form = event.target;
     const email = form.email.value;
     const password = form.pwd.value;
@@ -31,7 +33,10 @@ const SignIN = () => {
       form.reset();
       navigate('/courses')
     })
-    .catch(error => console.error(error))
+    .catch(error => {
+      console.error(error);
+      setError(error.message);
+    })
 
   };
 
@@ -40,6 +45,7 @@ const SignIN = () => {
 
   // google sign in handeler
   const googleLogIn = ()=> {
+    setError('');
     googleLogInProvider(googleProvider)
     .then(result => {
       const user = result.user;
@@ -48,6 +54,7 @@ const SignIN = () => {
     })
     .catch(error => {
       console.error('error', error);
+      setError(error.message);
     })
   };
 
@@ -135,6 +142,7 @@ const SignIN = () => {
                       className="focus:outline-none block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-sky-300"
                     />
                   </div>
+                  <small className="text-red-600">{error}</small>
                   <button
                     type="submit"
                     className="w-full rounded-md bg-sky-600 py-3 px-6 focus:bg-sky-700 active:bg-sky-500"
