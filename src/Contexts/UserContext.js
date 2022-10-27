@@ -41,6 +41,7 @@ const UserContext = ({ children }) => {
     const googleLogInProvider = (provider) =>{
       return signInWithPopup(auth, provider);
     };
+
   const authInfo = {user, createUser,logIn, logOut, googleLogInProvider};
 
   return (

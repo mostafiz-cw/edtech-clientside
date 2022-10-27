@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
@@ -6,56 +6,67 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Contexts/UserContext";
 
 const SignIN = () => {
-
   // firebase log in auth from user context
-  const {logIn, googleLogInProvider} = useContext(AuthContext);
+  const { logIn, googleLogInProvider } = useContext(AuthContext);
 
   // jump course page after log in using react router
   const navigate = useNavigate();
-  
-  const [error, setError] = useState('');
 
-
-
+  const [error, setError] = useState("");
 
   // sign in submit handeler
-  const signINSubmitHanler = (event)=>{
+  const signINSubmitHanler = (event) => {
     event.preventDefault();
-    setError('');
+    setError("");
     const form = event.target;
     const email = form.email.value;
     const password = form.pwd.value;
 
-    logIn(email,password)
-    .then(result => {
-      const user = result.user;
-      console.log(user);
-      form.reset();
-      navigate('/courses')
-    })
-    .catch(error => {
-      console.error(error);
-      setError(error.message);
-    })
-
+    logIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+        navigate("/courses");
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.message);
+      });
   };
 
   // google auth provider
   const googleProvider = new GoogleAuthProvider();
 
+  // github auth provider
+  const githubProvider = new GithubAuthProvider();
+
   // google sign in handeler
-  const googleLogIn = ()=> {
-    setError('');
+  const googleLogIn = () => {
+    setError("");
     googleLogInProvider(googleProvider)
-    .then(result => {
-      const user = result.user;
-      console.log(user);
-      navigate('/courses')
-    })
-    .catch(error => {
-      console.error('error', error);
-      setError(error.message);
-    })
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate("/courses");
+      })
+      .catch((error) => {
+        console.error("error", error);
+        setError(error.message);
+      });
+  };
+
+  // github log in
+  const githubLogIn = () => {
+    setError("");
+    googleLogInProvider(githubProvider)
+      .then((result) => {
+        const user = result.user;
+        navigate("/courses");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
@@ -75,7 +86,10 @@ const SignIN = () => {
                   Sign in to your account
                 </h2>
                 <div className="grid gap-6 sm:grid-cols-2">
-                  <button onClick={googleLogIn} className="h-11 rounded-full border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
+                  <button
+                    onClick={googleLogIn}
+                    className="h-11 rounded-full border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700"
+                  >
                     <div className="flex items-center justify-center space-x-4">
                       <img
                         src="https://svgshare.com/i/ng7.svg"
@@ -87,7 +101,10 @@ const SignIN = () => {
                       </span>
                     </div>
                   </button>
-                  <button className="h-11 rounded-full bg-gray-900 px-6 transition hover:bg-gray-800 focus:bg-gray-700 active:bg-gray-600 dark:bg-gray-700 dark:border dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
+                  <button
+                    onClick={githubLogIn}
+                    className="h-11 rounded-full bg-gray-900 px-6 transition hover:bg-gray-800 focus:bg-gray-700 active:bg-gray-600 dark:bg-gray-700 dark:border dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700"
+                  >
                     <div className="flex items-center justify-center space-x-4 text-white">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +129,11 @@ const SignIN = () => {
 
                   <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
                 </div>
-                <form onSubmit={signINSubmitHanler} action="" className="space-y-8">
+                <form
+                  onSubmit={signINSubmitHanler}
+                  action=""
+                  className="space-y-8"
+                >
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-gray-700">
                       Email

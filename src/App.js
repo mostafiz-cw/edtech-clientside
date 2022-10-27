@@ -6,6 +6,7 @@ import AllCourses from './Components/Courses/AllCourses';
 import CatagoryCourse from './Components/Courses/CatagoryCourse';
 import Courses from './Components/Courses/Courses';
 import Details from './Components/Courses/Details';
+import Error404 from './Components/Error404';
 import Faq from './Components/Faq';
 import Home from './Components/Home';
 import Register from './Components/Register';
@@ -53,6 +54,10 @@ function App() {
           element: <Details></Details>
         }
       ]
+    },
+    {
+      path: '*',
+      element: <Error404></Error404>
     }
   ]);
   return (
