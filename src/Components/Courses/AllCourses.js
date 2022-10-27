@@ -5,32 +5,32 @@ import { Link, useLoaderData } from "react-router-dom";
 import "./Courses.css";
 
 const AllCourses = () => {
-    const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-    const allCourses = useLoaderData();
-    // const {details, title} = courses;
-    console.log(allCourses);
+  const allCourses = useLoaderData();
+  // const {details, title} = courses;
+  console.log(allCourses);
 
-    useEffect(() => {
-        fetch('http://localhost:5000/categories')
-        .then(res => res.json())
-        .then(data => setCategories(data));
-    },[])
+  useEffect(() => {
+    fetch("http://localhost:5000/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  }, []);
 
-// console.log(categories);
+  // console.log(categories);
 
   return (
     <div className="section flex flex-col lg:flex-row">
       <div className="sidebar">
-        {
-            categories.map(catagory => <button
-                key={catagory.id}
-                type="button"
-                className="px-8 py-3 font-semibold border rounded dark:border-gray-100 dark:text-gray-100"
-              >
-               <Link to={`/catagory/${catagory.id}`}>{catagory.name}</Link>
-              </button>)
-        }
+        {categories.map((catagory) => (
+          <button
+            key={catagory.id}
+            type="button"
+            className="px-8 py-3 font-semibold border rounded dark:border-gray-100 dark:text-gray-100"
+          >
+            <Link to={`/catagory/${catagory.id}`}>{catagory.name}</Link>
+          </button>
+        ))}
         {/* <button
           type="button"
           className="px-8 py-3 font-semibold border rounded dark:border-gray-100 dark:text-gray-100"
@@ -66,9 +66,11 @@ const AllCourses = () => {
           {/* text - end */}
           <div className="grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 xl:gap-8">
             {/* article - start */}
-            {
-
-                allCourses.map(course => <div key={course._id} className="flex flex-col bg-white border rounded-lg overflow-hidden">
+            {allCourses.map((course) => (
+              <div
+                key={course._id}
+                className="flex flex-col bg-white border rounded-lg overflow-hidden"
+              >
                 <a
                   href="#/"
                   className="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative"
@@ -89,9 +91,7 @@ const AllCourses = () => {
                       {course.title}
                     </a>
                   </h2>
-                  <p className="text-gray-500 mb-8">
-                    {course.details}
-                  </p>
+                  <p className="text-gray-500 mb-8">{course.details}</p>
                   <div className="flex justify-between items-end mt-auto">
                     <div className="flex items-center gap-2">
                       <div className="w-10 h-10 shrink-0 bg-gray-100 rounded-full overflow-hidden">
@@ -109,19 +109,18 @@ const AllCourses = () => {
                         </span>
                       </div>
                     </div>
-                    <span className="text-gray-500 text-sm border rounded px-2 py-1">
-                      Article
-                    </span>
+                    <button
+                      type="button"
+                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                    >
+                      Enroll
+                    </button>
                   </div>
                 </div>
-              </div>)
-                
-            
-            }
+              </div>
+            ))}
             {/* article - end */}
 
-
-            
             {/* article - start */}
             {/* <div className="flex flex-col bg-white border rounded-lg overflow-hidden">
               <a

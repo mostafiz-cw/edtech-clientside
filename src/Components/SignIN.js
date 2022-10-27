@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,7 +7,7 @@ import { AuthContext } from "../Contexts/UserContext";
 const SignIN = () => {
 
   // firebase log in auth from user context
-  const {logIn} = useContext(AuthContext);
+  const {logIn, googleLogInProvider} = useContext(AuthContext);
 
   // jump course page after log in using react router
   const navigate = useNavigate();
@@ -32,6 +33,22 @@ const SignIN = () => {
 
   };
 
+  // google auth provider
+  const googleProvider = new GoogleAuthProvider();
+
+  // google sign in handeler
+  const googleLogIn = ()=> {
+    googleLogInProvider(googleProvider)
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+      navigate('/courses')
+    })
+    .catch(error => {
+      console.error('error', error);
+    })
+  };
+
   return (
     <div>
       <div className="relative py-16 before:absolute before:inset-0 before:h-[50%] before:w-full before:bg-gray-200">
@@ -49,7 +66,7 @@ const SignIN = () => {
                   Sign in to your account
                 </h2>
                 <div className="grid gap-6 sm:grid-cols-2">
-                  <button className="h-11 rounded-full border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
+                  <button onClick={googleLogIn} className="h-11 rounded-full border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
                     <div className="flex items-center justify-center space-x-4">
                       <img
                         src="https://svgshare.com/i/ng7.svg"

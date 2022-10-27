@@ -9,16 +9,10 @@ const Home = () => {
             <div className="lg:flex lg:items-center lg:gap-x-16">
               <div className="space-y-8 lg:w-7/12">
                 <h1 className=" font-bold text-gray-900 text-4xl md:text-5xl">
-                  Run successful remote and hybrid teams
+                Learn creative skills with us
                 </h1>
-                <p className="text-gray-600 lg:w-11/12">
-                  DailyBot takes chat and collaboration to the next level: daily
-                  standups, team check-ins, surveys, kudos, best companion bot
-                  for your virtual watercooler, 1:1 intros, motivation tracking
-                  and more.
-                </p>
                 <span className="block font-semibold">
-                  The best companion bot for your chat app.
+                Explore free courses to learn fundamental techniques and concepts using industry leading software to drive your creative work and grow your career. Explore thousands of tutorials, tips and tricks from leading industry experts. Totally free.
                 </span>
               </div>
               <div hidden="" className="lg:block lg:w-5/12">

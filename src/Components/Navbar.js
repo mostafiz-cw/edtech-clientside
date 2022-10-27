@@ -13,7 +13,8 @@ function BasicExample() {
   return (
     <Navbar bg="primary" expand="lg" variant="dark">
       <Container>
-        <Link to='/' className="no-underline"><Navbar.Brand href="#home" className="font-bold">React-Bootstrap</Navbar.Brand></Link>
+        <span><img src="https://i.postimg.cc/DZn2JzFN/technology.png" alt="" /></span>
+        <Link to='/' className="no-underline"><Navbar.Brand href="#home" className="font-bold">TUTFLIX</Navbar.Brand></Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -24,8 +25,17 @@ function BasicExample() {
             
             {
               user?.uid ?
+
+              <>
+              <img
+                className="w-10 h-10 rounded-full"
+                  src={user.photoURL}
+                  alt="avatar"/>
+
               <Link onClick={logOut} to='/' className="no-underline font-semibold"><Nav.Link href="#link" className="text-white">Log Out</Nav.Link>
-              </Link>  :
+              </Link> 
+              </>
+               :
 
               <>
 
@@ -38,7 +48,14 @@ function BasicExample() {
 
             }
             
-            <span>{user?.email}</span>
+            {/* <span>{user?.email}</span> */}
+            {/* {
+              user?.photoURL ? <img
+                className="w-10 h-10 rounded-full"
+                  src={user.photoURL}
+                  alt="Rounded avatar"/> : <h1>h</h1>
+
+            } */}
             {/* <NavDropdown title="Log In" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
