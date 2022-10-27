@@ -36,7 +36,7 @@ function App() {
         },
         {
           path: '/courses',
-          loader: () => fetch('http://localhost:5000/course'),
+          loader: () => fetch('https://assignment-10-serverside-rouge.vercel.app/course'),
           element: <AllCourses></AllCourses>
         },
         {
@@ -45,7 +45,7 @@ function App() {
         },
         {
           path: '/catagory/:id',
-          loader: ({params}) => fetch(`http://localhost:5000/catagory/${params.id}`),
+          loader: ({params}) => fetch(`https://assignment-10-serverside-rouge.vercel.app/catagory/${params.id}`),
           element: <Courses></Courses>
         },
         {

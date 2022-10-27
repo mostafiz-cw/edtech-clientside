@@ -12,7 +12,7 @@ const AllCourses = () => {
   console.log(allCourses);
 
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://assignment-10-serverside-rouge.vercel.app/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);
