@@ -5,6 +5,7 @@ import Blog from './Components/Blog';
 import AllCourses from './Components/Courses/AllCourses';
 import CatagoryCourse from './Components/Courses/CatagoryCourse';
 import Courses from './Components/Courses/Courses';
+import Details from './Components/Courses/Details';
 import Faq from './Components/Faq';
 import Home from './Components/Home';
 import Register from './Components/Register';
@@ -46,6 +47,10 @@ function App() {
           path: '/catagory/:id',
           loader: ({params}) => fetch(`http://localhost:5000/catagory/${params.id}`),
           element: <Courses></Courses>
+        },
+        {
+          path: '/details/:id',
+          element: <Details></Details>
         }
       ]
     }
