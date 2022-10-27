@@ -4,11 +4,12 @@ import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import "./Courses.css";
 
-const Courses = () => {
+const AllCourses = () => {
     const [categories, setCategories] = useState([]);
 
-    const courses = useLoaderData();
-    const urlImage = (courses.image_url);
+    const allCourses = useLoaderData();
+    // const {details, title} = courses;
+    console.log(allCourses);
 
     useEffect(() => {
         fetch('http://localhost:5000/categories')
@@ -65,58 +66,64 @@ const Courses = () => {
           {/* text - end */}
           <div className="grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 xl:gap-8">
             {/* article - start */}
-            <div className="flex flex-col bg-white border rounded-lg overflow-hidden">
-              <a
-                href="#/"
-                className="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative"
-              >
-                <img
-                  src={urlImage}
-                  loading="lazy"
-                  alt=" by Minh Pham"
-                  className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200"
-                />
-              </a>
-              <div className="flex flex-col flex-1 p-4 sm:p-6">
-                <h2 className="text-gray-800 text-lg font-semibold mb-2">
-                  <a
-                    href="#/"
-                    className="hover:text-indigo-500 active:text-indigo-600 transition duration-100"
-                  >
-                    New trends in Tech
-                  </a>
-                </h2>
-                <p className="text-gray-500 mb-8">
-                  This is a section of some simple filler text, also known as
-                  placeholder text. It shares some characteristics of a real
-                  written text.
-                </p>
-                <div className="flex justify-between items-end mt-auto">
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 shrink-0 bg-gray-100 rounded-full overflow-hidden">
-                      <img
-                        src="https://images.unsplash.com/photo-1611898872015-0571a9e38375?auto=format&q=75&fit=crop&w=64"
-                        loading="lazy"
-                        alt=" by Brock Wegner"
-                        className="w-full h-full object-cover object-center"
-                      />
+            {
+
+                allCourses.map(course => <div key={course._id} className="flex flex-col bg-white border rounded-lg overflow-hidden">
+                <a
+                  href="#/"
+                  className="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative"
+                >
+                  <img
+                    src={course.image_url}
+                    loading="lazy"
+                    alt=" by Minh Pham"
+                    className="w-full h-full object-cover object-center absolute inset-0 group-hover:scale-110 transition duration-200"
+                  />
+                </a>
+                <div className="flex flex-col flex-1 p-4 sm:p-6">
+                  <h2 className="text-gray-800 text-lg font-semibold mb-2">
+                    <a
+                      href="##"
+                      className="hover:text-indigo-500 active:text-indigo-600 transition duration-100"
+                    >
+                      {course.title}
+                    </a>
+                  </h2>
+                  <p className="text-gray-500 mb-8">
+                    {course.details}
+                  </p>
+                  <div className="flex justify-between items-end mt-auto">
+                    <div className="flex items-center gap-2">
+                      <div className="w-10 h-10 shrink-0 bg-gray-100 rounded-full overflow-hidden">
+                        <img
+                          src={course.thumbnail_url}
+                          loading="lazy"
+                          alt=" by Brock Wegner"
+                          className="w-full h-full object-cover object-center"
+                        />
+                      </div>
+                      <div>
+                        <span className="block text-indigo-500">Mike Lane</span>
+                        <span className="block text-gray-400 text-sm">
+                          July 19, 2021
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="block text-indigo-500">Mike Lane</span>
-                      <span className="block text-gray-400 text-sm">
-                        July 19, 2021
-                      </span>
-                    </div>
+                    <span className="text-gray-500 text-sm border rounded px-2 py-1">
+                      Article
+                    </span>
                   </div>
-                  <span className="text-gray-500 text-sm border rounded px-2 py-1">
-                    Article
-                  </span>
                 </div>
-              </div>
-            </div>
+              </div>)
+                
+            
+            }
             {/* article - end */}
+
+
+            
             {/* article - start */}
-            <div className="flex flex-col bg-white border rounded-lg overflow-hidden">
+            {/* <div className="flex flex-col bg-white border rounded-lg overflow-hidden">
               <a
                 href="#"
                 className="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative"
@@ -166,10 +173,10 @@ const Courses = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* article - end */}
             {/* article - start */}
-            <div className="flex flex-col bg-white border rounded-lg overflow-hidden">
+            {/* <div className="flex flex-col bg-white border rounded-lg overflow-hidden">
               <a
                 href="#"
                 className="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative"
@@ -217,10 +224,10 @@ const Courses = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* article - end */}
             {/* article - start */}
-            <div className="flex flex-col bg-white border rounded-lg overflow-hidden">
+            {/* <div className="flex flex-col bg-white border rounded-lg overflow-hidden">
               <a
                 href="#"
                 className="group h-48 md:h-64 block bg-gray-100 overflow-hidden relative"
@@ -268,7 +275,7 @@ const Courses = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* article - end */}
           </div>
         </div>
@@ -277,4 +284,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default AllCourses;
